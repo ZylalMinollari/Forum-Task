@@ -20,23 +20,46 @@
         </div>
 
         {{-- Categories --}}
-        <div>
-            <x-sidenav.title>
-                {{ __('Categories') }}
-            </x-sidenav.title>
+        @if (auth()->user()->isAdmin())
             <div>
-                <x-sidenav.link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                    <x-zondicon-view-tile class="w-3 text-green-400" />
-                    <span>{{ __('Index') }}</span>
-                </x-sidenav.link>
+                <x-sidenav.title>
+                    {{ __('Categories') }}
+                </x-sidenav.title>
+                <div>
+                    <x-sidenav.link href="{{ route('admin.categories.index') }}" :active="request()->routeIs('categories.index')">
+                        <x-zondicon-view-tile class="w-3 text-green-400" />
+                        <span>{{ __('Index') }}</span>
+                    </x-sidenav.link>
+                </div>
+                <div>
+                    <x-sidenav.link href="{{ route('admin.categories.create') }}" :active="request()->routeIs('categories.create')">
+                        <x-zondicon-compose class="w-3 text-green-400" />
+                        <span>{{ __('Create') }}</span>
+                    </x-sidenav.link>
+                </div>
             </div>
+        @endif
+        {{-- Tags --}}
+        @if (auth()->user()->isAdmin())
             <div>
-                <x-sidenav.link href="{{ route('categories.create') }}" :active="request()->routeIs('categories.create')">
-                    <x-zondicon-compose class="w-3 text-green-400" />
-                    <span>{{ __('Create') }}</span>
-                </x-sidenav.link>
+                <x-sidenav.title>
+                    {{ __('Tags') }}
+                </x-sidenav.title>
+                <div>
+                    <x-sidenav.link href="{{ route('admin.tags.index') }}" :active="request()->routeIs('tags.index')">
+                        <x-zondicon-view-tile class="w-3 text-green-400" />
+                        <span>{{ __('Index') }}</span>
+                    </x-sidenav.link>
+                </div>
+                <div>
+                    <x-sidenav.link href="{{ route('admin.tags.create') }}" :active="request()->routeIs('tags.create')">
+                        <x-zondicon-compose class="w-3 text-green-400" />
+                        <span>{{ __('Create') }}</span>
+                    </x-sidenav.link>
+                </div>
             </div>
-        </div>
+        @endif
+
 
         {{-- Threads --}}
         <div>
@@ -61,7 +84,8 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-sidenav.link href="{{ route('logout') }}" onclick="event.preventDefault();                                               this.closest('form').submit();">
+                    <x-sidenav.link href="{{ route('logout') }}"
+                        onclick="event.preventDefault();                                               this.closest('form').submit();">
                         <x-heroicon-o-logout class="w-4 text-green-400" />
                         <span>{{ __('Logout') }}</span>
                     </x-sidenav.link>
