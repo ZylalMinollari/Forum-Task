@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Pages;
 use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Jobs\CreateThread;
 use Illuminate\Http\Request;
-use Mews\Purifier\Facades\Purifier;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ThreadStoreRequest;
@@ -36,14 +35,7 @@ class ThreadController extends Controller
 
     public function store(ThreadStoreRequest $request)
     {
-        $thread = new Thread;
-        $thread->title = $request->title;
-        $thread->slug = Str::slug($request->title);
-        $thread->body = Purifier::clean($request->body);
-        $thread->category_id = $request->category_id;
-        $thread->author_id = Auth::id();
-        $thread->save();
-        $thread->syncTags($request->tags);
+        $this->dispatchSync(CreateThread::fromRequest($request));
         return redirect()->route('threads.index')->with('success', 'Thread created!');
     }
 

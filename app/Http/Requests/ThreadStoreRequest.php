@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ThreadStoreRequest extends FormRequest
@@ -30,5 +31,30 @@ class ThreadStoreRequest extends FormRequest
             'tags' => ['array'],
             'tags.*' => ['exists:tags,id'],
         ];
+    }
+
+    public function author(): User
+    {
+        return $this->user();
+    }
+
+    public function title(): string
+    {
+        return $this->get('title');
+    }
+
+    public function body(): string
+    {
+        return $this->get('body');
+    }
+
+    public function category(): string
+    {
+        return $this->get('category_id');
+    }
+
+    public function tags(): array
+    {
+        return $this->get('tags', []);
     }
 }
