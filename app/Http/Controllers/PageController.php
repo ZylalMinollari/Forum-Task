@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function single()
-    {
-        return view('threads.show');
-    }
-
     public function create()
     {
         return view('threads.create');

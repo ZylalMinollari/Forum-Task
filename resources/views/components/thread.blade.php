@@ -10,10 +10,10 @@
         {{-- Content --}}
         <div class="col-span-6 space-y-4">
 
-            <a href="{{ route('single') }}" class="space-y-2">
-                <h2 class="text-xl tracking-wide hover:text-blue-400">This is the heading for the forum post</h2>
+            <a href="{{ route('threads.show', [$thread->category->slug(), $thread->slug()]) }}" class="space-y-2">
+                <h2 class="text-xl tracking-wide hover:text-blue-400">{{ $thread->title }}</h2>
                 <p class="text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime laboriosam quo recusandae tempora voluptatum dignissimos quidem nemo animi, repellendus saepe?
+                    {{$thread->excerpt() }}
                 </p>
             </a>
 
