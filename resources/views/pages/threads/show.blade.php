@@ -4,26 +4,23 @@
         <x-partials.sidenav />
 
         <section class="flex flex-col col-span-3 gap-y-4">
-            <small class="text-sm text-gray-400">category>discussion>topic</small>
+            <small class="text-sm text-gray-400">Threads>{{ $category->name() }}>{{ $thread->title() }}</small>
 
             <article class="p-5 bg-white shadow">
                 <div class="grid grid-cols-8">
 
                     {{-- Avatar --}}
                     <div class="col-span-1">
-                        <x-user.avatar />
+                        <x-user.avatar :user="$thread->author()" />
                     </div>
 
                     {{-- Thread --}}
                     <div class="col-span-7 space-y-6">
                         <div class="space-y-3">
-                            <h2 class="text-xl tracking-wide hover:text-blue-400">This is the heading for the forum post</h2>
-                            <p class="text-gray-500">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum beatae quod eligendi consequatur omnis sequi veritatis quidem reiciendis asperiores sint illum debitis quam voluptates, nemo rem consectetur dolor error neque fuga nobis est magnam! Pariatur illum enim nobis laboriosam suscipit dolore aperiam aut. Id maiores debitis voluptatem esse expedita ullam!
-                            </p>
-                            <p class="text-gray-500">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum beatae quod eligendi consequatur omnis sequi veritatis quidem reiciendis asperiores sint illum debitis quam voluptates, nemo rem consectetur dolor error neque fuga nobis est magnam! Pariatur illum enim nobis laboriosam suscipit dolore aperiam aut. Id maiores debitis voluptatem esse expedita ullam!
-                            </p>
+                            <h2 class="text-xl tracking-wide hover:text-blue-400">{{$thread->title}}</h2>
+                            <div class="text-gray-500">
+                                {!! $thread->body() !!}
+                            </div>
                         </div>
 
                         <div class="flex justify-between">
@@ -39,7 +36,7 @@
                             {{-- Date Posted --}}
                             <div class="flex items-center text-xs text-gray-500">
                                 <x-heroicon-o-clock class="w-4 h-4 mr-1" />
-                                Posted: 4hours Ago
+                                Posted: {{ $thread->created_at->diffForHumans() }}
                             </div>
 
 
