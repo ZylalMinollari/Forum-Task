@@ -6,7 +6,9 @@ use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\Category;
 use App\Jobs\CreateThread;
+use App\Jobs\UpdateThread;
 use Illuminate\Http\Request;
+use App\Policies\ThreadPolicy;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ThreadStoreRequest;
@@ -47,16 +49,22 @@ class ThreadController extends Controller
 
     public function edit(Thread $thread)
     {
-        //
+        $this->authorize(ThreadPolicy::UPDATE, $thread);
+        $tags = Tag::all();
+        $oldTags = $thread->tags()->pluck('id')->toArray();
+        $categories = Category::all();
+        $selectedCategory = $thread->category;
+
+        return view('pages.threads.edit', compact('thread','tags','oldTags','categories','selectedCategory'));
     }
 
     public function update(Request $request, Thread $thread)
     {
-        //
+        $this->authorize(ThreadPolicy::UPDATE, $thread);
+
+        $this->dispatchSync(UpdateThread::fromRequest($thread, $request));
+
+        return redirect()->route('threads.index')->with('success', 'Thread Updated!');
     }
 
-    public function destroy(Thread $thread)
-    {
-        //
-    }
 }

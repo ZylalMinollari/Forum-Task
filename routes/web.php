@@ -30,6 +30,9 @@ Route::group(['prefix' => 'threads', 'as' => 'threads.'], function () {
     Route::get('create', [ThreadController::class, 'create'])->name('create');
     Route::post('/', [ThreadController::class, 'store'])->name('store');
     Route::get('/{category:slug}/{thread:slug}', [ThreadController::class, 'show'])->name('show');
+    Route::get('/{thread:slug}/edit', [ThreadController::class, 'edit'])->name('edit');
+    Route::post('/{thread:slug}', [ThreadController::class, 'update'])->name('update');
+    Route::get('/{category:slug}/{thread:slug}', [ThreadController::class, 'show'])->name('show');
     
     Route::group(['as' => 'tags.'], function () {
         Route::get('/{tag:slug}', [TagController::class, 'index'])->name('index');
