@@ -1,7 +1,7 @@
 <footer class="p-5 bg-blue-500">
     <div class="text-black wrapper">
         <span>
-            &copy Copyright 2021
+            Stackoverflow
         </span>
     </div>
 </footer>
