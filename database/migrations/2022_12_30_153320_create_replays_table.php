@@ -15,6 +15,10 @@ class CreateReplaysTable extends Migration
     {
         Schema::create('replays', function (Blueprint $table) {
             $table->id();
+            $table->text('body');
+            $table->integer('replyable_id');
+            $table->string('replyable_type')->default('');
+            $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });
     }
