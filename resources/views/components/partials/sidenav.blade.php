@@ -8,16 +8,6 @@
                 {{ __('New Thread') }}
             </a>
         </div>
-
-        <div class="pb-4 space-y-4">
-            {{-- Subscribe to thread button --}}
-            <x-buttons.secondary>
-                {{ __('Subscribe to Thread') }}
-            </x-buttons.secondary>
-            <p class="text-sm text-gray-500">
-                Subscribe to be notified whenever new discussions are created in the "Category One" forum.
-            </p>
-        </div>
     </div>
 
     {{-- Categories --}}

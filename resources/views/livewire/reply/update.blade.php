@@ -25,12 +25,6 @@
                         </p>
 
                         <div class="absolute flex justify-between w-full bottom-1">
-
-                            {{-- Likes --}}
-                            <div class="flex space-x-5 text-gray-500">
-                                <livewire:like-reply :reply='App\Models\Reply::find($replyId)'>
-                            </div>
-
                             {{-- Date Posted --}}
                             <div class="flex items-center text-xs text-gray-500">
                                 <x-heroicon-o-clock class="w-4 h-4 mr-1" />
@@ -42,13 +36,13 @@
             </div>
 
             <div class="absolute flex space-x-3 top-2 right-2">
-                @can(App\Policies\ReplyPolicy::UPDATE, App\Models\Reply::find($replyId))
+                @can(App\Policies\ReplyPolicy::UPDATE, App\Models\Replay::find($replyId))
                 <x-links.secondary x-on:click="editReply = true; $nextTick(() => focus())" class="cursor-pointer">
                     {{ __('Edit') }}
                 </x-links.secondary>
                 @endcan
 
-                @can(App\Policies\ReplyPolicy::DELETE, App\Models\Reply::find($replyId))
+                @can(App\Policies\ReplyPolicy::DELETE, App\Models\Replay::find($replyId))
                 <livewire:reply.delete :replyId="$replyId" :wire:key="$replyId" :page="request()->fullUrl()" />
                 @endcan
             </div>
