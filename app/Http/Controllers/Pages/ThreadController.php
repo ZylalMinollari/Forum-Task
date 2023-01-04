@@ -21,7 +21,7 @@ class ThreadController extends Controller
     {
         $this->middleware([Authenticate::class, EnsureEmailIsVerified::class])->except(['index', 'show']);
     }
-    
+
     public function index()
     {
         $threads = Thread::orderBy('created_at','desc')->paginate(5);
@@ -58,7 +58,7 @@ class ThreadController extends Controller
         return view('pages.threads.edit', compact('thread','tags','oldTags','categories','selectedCategory'));
     }
 
-    public function update(Request $request, Thread $thread)
+    public function update(ThreadStoreRequest $request, Thread $thread)
     {
         $this->authorize(ThreadPolicy::UPDATE, $thread);
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Jobs\CreateReply;
-use Illuminate\Http\Request;
 use App\Policies\ReplyPolicy;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Authenticate;
@@ -14,12 +13,12 @@ class ReplyController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware([Authenticate::class, EnsureEmailIsVerified::class]);
+        $this->middleware([Authenticate::class, EnsureEmailIsVerified::class]);
     }
 
     public function store(CreateReplyRequest $request) {
 
-        $this->authorize(ReplyPolicy::CREATE, Replay::class);
+        //$this->authorize(ReplyPolicy::CREATE, Replay::class);
 
         $this->dispatchSync(CreateReply::fromRequest($request));
 

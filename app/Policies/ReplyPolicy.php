@@ -14,7 +14,7 @@ class ReplyPolicy
     const UPDATE = 'update';
     const DELETE = 'delete';
 
-    public function create(User $user): bool
+    public function create(User $user, Replay $reply): bool
     {
         return $user->hasVerifiedEmail();
     }
