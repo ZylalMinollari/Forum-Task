@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\Replay;
 use App\Models\User;
+use App\Models\Replay;
 use App\Models\Thread;
 use App\Policies\UserPolicy;
-use App\Policies\ThreadPolicy;
 use App\Policies\ReplyPolicy;
-use Illuminate\Support\Facades\Gate;
+use App\Policies\ThreadPolicy;
+use App\Policies\NotificationPolicy;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -22,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Thread::class => ThreadPolicy::class,
         Replay::class=>ReplyPolicy::class,
+        DatabaseNotification::class => NotificationPolicy::class
     ];
 
     /**

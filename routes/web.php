@@ -7,6 +7,7 @@ use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\Pages\ReplyController;
 use App\Http\Controllers\Pages\ThreadController;
 use App\Http\Controllers\Pages\ProfileController;
+use App\Http\Controllers\Dashboard\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::group(['prefix' => 'threads', 'as' => 'threads.'], function () {
     Route::get('/{thread:slug}/edit', [ThreadController::class, 'edit'])->name('edit');
     Route::post('/{thread:slug}', [ThreadController::class, 'update'])->name('update');
     Route::get('/{category:slug}/{thread:slug}', [ThreadController::class, 'show'])->name('show');
-    
+
     Route::group(['as' => 'tags.'], function () {
         Route::get('/{tag:slug}', [TagController::class, 'index'])->name('index');
     });
@@ -47,6 +48,16 @@ Route::group(['prefix' => 'replies', 'as' => 'replies.'], function () {
      */
     Route::post('/', [ReplyController::class, 'store'])->name('store');
     Route::get('reply/{id}/{type}', [ReplyController::class, 'redirect'])->name('replyAble');
+});
+
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+    /* Name: Notifications
+     * Url: /dashboard/notifications*
+     * Route: dashboard.notifications*
+     */
+    Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+    });
 });
 
 Route::get('/category/discussion/topic', [PageController::class, 'single'])->name('single');

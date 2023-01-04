@@ -17,6 +17,12 @@
                     <span>{{ __('Users') }}</span>
                 </x-sidenav.link>
             </div>
+            <div>
+                <x-sidenav.link href="{{ route('dashboard.notifications.index') }}" :active="request()->routeIs('users')">
+                    <x-zondicon-notifications-outline class="w-3 text-green-400" />
+                    <span>{{ __('Notification') }}</span>
+                </x-sidenav.link>
+            </div>
         </div>
 
         {{-- Categories --}}

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Replay;
 use App\Models\ReplyAble;
 use Illuminate\Bus\Queueable;
+use App\Events\ReplyWasCreated;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Http\Requests\CreateReplyRequest;
@@ -56,6 +57,8 @@ class CreateReply implements ShouldQueue
         $reply->authoredBy($this->author);
         $reply->to($this->replyAble);
         $reply->save();
+
+        event(new ReplyWasCreated($reply));
 
         return $reply;
     }

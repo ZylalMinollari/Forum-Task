@@ -75,6 +75,8 @@
                 </div>
                 @endif
 
+                <livewire:notification.indicator>
+
                 <!-- Settings Dropdown -->
                 <div class="relative ml-3">
                     <x-jet-dropdown align="right" width="48">

@@ -72,7 +72,21 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->id;
     }
-    
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function userName(): string
+    {
+        return $this->username;
+    }
+
+    public function emailAddress(): string
+    {
+        return $this->email;
+    }
     public function type(): int {
         return (int) $this->type;
     }
